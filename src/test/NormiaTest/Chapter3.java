@@ -15,16 +15,57 @@ import org.openqa.selenium.WebElement;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+
 
 public class Chapter3 {
 
-    private Utils utilsFunction = new Utils();
 
+    private Utils utilsFunction = new Utils();
     private final String userDirProperty = System.getProperty("user.dir");
     private ChromeDriver chromeDriver;
+
+
+    public void refresh () {
+        chromeDriver.navigate().refresh();
+    }
+
+    public void word () {
+
+        List<String> expectedWords = new ArrayList<>(Arrays.asList("pool", "fool", "mool", "cool")) ;
+        Integer counter = 0;
+
+        for(;;) {
+            counter++;
+
+            String myText = chromeDriver.findElementById("leftdiv").getText();
+
+            if(expectedWords.contains(myText)) {
+                Assert.assertTrue(expectedWords.contains(myText));
+                expectedWords.remove(myText);
+                refresh();
+            }
+
+
+            if (expectedWords.size() == 0) {
+                break;
+            }
+        }
+
+
+        System.out.println("Number of final retries is: " + counter);
+
+
+    }
+
+
+
+
+    //TODO : when all the words from myText are found in the list, break the iteration.
+
+
 
     @BeforeTest
     public void setup() {
@@ -42,8 +83,10 @@ public class Chapter3 {
     //Elements are displayed
 
     @Test(description = "Buttons", priority = 1)
-    public void contentTest() {
+    public void contentTest() throws InterruptedException {
         chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
+
+
 
         //1st Text
 
@@ -52,8 +95,50 @@ public class Chapter3 {
 
         //2nd Text
 
-        chromeDriver.findElementById("leftdiv").click();
-        Assert.assertTrue(chromeDriver.findElementById("leftdiv").getText().contains("ool"));
+
+
+
+
+
+        //TODO :  create a for loop with 15+ iterations and an if condition if you have all 4 elements then break;
+
+
+
+
+
+
+
+//        chromeDriver.findElementById("leftdiv").click();
+//        String myText = chromeDriver.findElementById("leftdiv").getText();
+//
+//        List<String> words = new ArrayList<String>();
+//        words.add(chromeDriver.findElementById("leftdiv").getText());
+//        System.out.println(">>>>>" + myText + "<<<<<<<");
+//        refresh();
+//
+//        System.out.println(">>>>>" + myText + "<<<<<<<");
+//
+//        refresh();
+//
+//        System.out.println(">>>>>" + myText + "<<<<<<<");
+//
+//        refresh();
+//
+//        System.out.println(">>>>>" + myText + "<<<<<<<");
+//
+//        refresh();
+//
+//        System.out.println(">>>>>" + myText + "<<<<<<<");
+//
+//       refresh();
+//
+//        System.out.println(">>>>>" + myText + "<<<<<<<");
+//
+//        Assert.assertTrue(chromeDriver.findElementById("leftdiv").getText().contains("ool"));
+//
+//        chromeDriver.findElementById("leftdiv").getText();
+
+
 
         //The text is changing after each refresh in this situation. I decided to test this using the above method -> is there a better way to do this?
         //I saw that there are 4 variations of words, each one containing "ool". I have not found any methods online on how to test text which changes
