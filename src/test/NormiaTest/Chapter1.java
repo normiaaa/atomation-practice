@@ -1,33 +1,42 @@
 package NormiaTest;
 
-import org.openqa.selenium.By;
+import Pages.Chapter1Page;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.Assert;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
+
 import java.util.concurrent.TimeUnit;
 
 
-public class Chapter1 {
 
-    private Utils utilsFunction = new Utils();
+public class Chapter1{
+
 
     private final String userDirProperty = System.getProperty("user.dir");
     private ChromeDriver chromeDriver;
+    public Utility utils = new Utility();
+
+
+
+    Chapter1Page ch1p;
+
+    @BeforeMethod
+    public void beforeMethod() {
+        System.out.println("BeforeMethod");
+        chromeDriver.get(utils.URL_CHAPTER1);
+
+        //I found this method - to get the URL before each method. is this ok? or?
+    }
 
     @BeforeTest
     public void setup() {
         System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
         chromeDriver = new ChromeDriver();
         chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        chromeDriver.get("http://book.theautomatedtester.co.uk");
+        chromeDriver.get(utils.GENERAL_URL);
+        ch1p = new Chapter1Page(this.chromeDriver);
     }
 
     @AfterTest
@@ -39,62 +48,61 @@ public class Chapter1 {
 
     @Test(description = "Display Elements", priority = 1)
     public void contentTest() {
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter1");
-        Assert.assertTrue(chromeDriver.getTitle().contains("Selenium: Beginners Guide"));
-        chromeDriver.findElementById("verifybutton").isDisplayed();
-        Assert.assertTrue(chromeDriver.findElementById("divontheleft").getText().contains("Assert that this text is on the page"));
+
+        //Check title
+        ch1p.checkTitle();
+        ch1p.checkIfButtonIsDisplayed();
 
     }
 
     @Test(description = "Radio Button and List", priority = 2)
     public void radioButtonListTest() throws InterruptedException {
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter1");
-        chromeDriver.findElementById("radiobutton").click();
-        chromeDriver.findElementById("selecttype").click();
 
-        Select selecttype1 = new Select(chromeDriver.findElementById("selecttype"));
-        selecttype1.selectByValue("Selenium IDE");
-        selecttype1.selectByValue("Selenium Code");
-        selecttype1.selectByValue("Selenium RC");
-        selecttype1.selectByValue("Selenium Grid");
-
-        chromeDriver.findElementById("selecttype").click();
-
-        chromeDriver.findElementByName("selected(1234)").click();
+        ch1p.clickOnRadioButton();
+        ch1p.selectItemsFromDropdown();
+        ch1p.selectSpecificItemFromDropdown(utils.SELECT_SELENIUM_VALUE2);
 
 
         //I made this by Value text, it should be more ok by index?
     }
 
-    @Test(description = "Linkst", priority = 3)
+    @Test(description = "Links", priority = 3)
     public void links() throws InterruptedException {
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter1");
+//        chromeDriver.get(utils.URL_CHAPTER1);
 
-        //First Window
+        //Open the first Window
 
-        chromeDriver.findElementByClassName("multiplewindow").click();
-        SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(chromeDriver.findElementByClassName("multiplewindow").getAttribute("href")).isEqualTo("http://book.theautomatedtester.co.uk/windowpopup.html");
+        ch1p.clickOnNewWindow1();
+        ch1p.checkNewWindow1();
 
-        //Second Window
+        //Open the second window
 
-        chromeDriver.findElementByClassName("multiplewindow2").click();
-        softAssertions.assertThat(chromeDriver.findElementByClassName("multiplewindow2").getAttribute("href")).isEqualTo("http://book.theautomatedtester.co.uk/windowpopup.html");
+        ch1p.openNewWindow2();
+        ch1p.checkNewWindow2();
 
         //Load a page with Ajax
 
-        chromeDriver.findElementByClassName("loadajax").click();
-        softAssertions.assertThat(chromeDriver.findElementByClassName("loadajax").getAttribute("href")).contains("The following text has been loaded from another page on this site. It has been loaded in an asynchronous fashion so that we can work through the AJAX section of this chapter");
+        ch1p.clickFirstAjaxElement();
+        ch1p.checkFirstAjaxElement();
 
 
     }
 
     @Test(description = "Radio Button and List", priority = 4)
     public void loadText() throws InterruptedException {
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter1");
-        chromeDriver.findElementById("secondajaxbutton").click();
-        SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(chromeDriver.findElementById("secondajaxbutton").getAttribute("href")).contains("I have been added with a timeout");
+
+        //Find second ajax button and click on it
+
+        ch1p.clickSecondAjaxElement();
+        ch1p.checkSecondAjaxElement();
+
+    }
+
+
+    public void title() {
+
+        ch1p.checkTitle();
+
 
     }
 }

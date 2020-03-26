@@ -1,33 +1,37 @@
 package NormiaTest;
 
-import org.openqa.selenium.By;
+import Pages.Chapter2Page;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.Assert;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
+
 import java.util.concurrent.TimeUnit;
 
 public class Chapter2 {
 
-    private Utils utilsFunction = new Utils();
+    public Utility utils = new Utility();
 
     private final String userDirProperty = System.getProperty("user.dir");
     private ChromeDriver chromeDriver;
 
-    @BeforeTest
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
-        chromeDriver = new ChromeDriver();
-        chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter2");
+    Chapter2Page ch2p;
+
+    @BeforeMethod
+    public void beforeMethod() {
+        System.out.println("BeforeMethod");
+        chromeDriver.get(utils.URL_CHAPTER2);
     }
+
+        @BeforeTest
+        public void setup () {
+            System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
+            chromeDriver = new ChromeDriver();
+            chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            chromeDriver.get(utils.URL_CHAPTER2);
+            ch2p = new Chapter2Page(this.chromeDriver);
+        }
 
     @AfterTest
     public void tearDown() {
@@ -38,34 +42,38 @@ public class Chapter2 {
 
     @Test(description = "Buttons", priority = 1)
     public void contentTest() {
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter2");
+       // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter2");
 
         //1st button
 
-        chromeDriver.findElementByName("but2").click();
-        Assert.assertTrue(chromeDriver.findElementByName("but2").getAttribute("value").contains("Button with name"));
+        ch2p.clickOnButtonWithName();
+        ch2p.checkButtonWithNameText();
 
         //2nd button
 
-        chromeDriver.findElementByCssSelector ("[value='Random']").click();
-        Assert.assertTrue(chromeDriver.findElementByCssSelector ("[value='Random']").getAttribute("value").contains("Random"));
+        ch2p.clickOnRandomButton();
+        ch2p.checkRandomButtonText();
 
         //3rd button
 
-        chromeDriver.findElementById("but1").click();
-        Assert.assertTrue(chromeDriver.findElementById("but1").getAttribute("value").contains("Button with ID"));
+        ch2p.clickOnButtonWithID();
+        ch2p.checknButtonWithIDText();
 
         //4th button
 
-        chromeDriver.findElementByName("verifybutton").click();
-        Assert.assertTrue(chromeDriver.findElementByName("verifybutton").getAttribute("value").contains("Verify this button\n" +
-                "                 here"));
+        ch2p.clickOnSiblingButton();
+        ch2p.checkSiblingButtonText();
+
 
         //5th button
 
-        chromeDriver.findElementByName("verifybutton1").click();
-        Assert.assertTrue(chromeDriver.findElementByName("verifybutton1").getAttribute("value").contains("chocolate"));
+        ch2p.clickOnVerifyButton();
+        ch2p.checkVerifyButtonText();
 
+        //6th button
+
+        ch2p.clickOnChocolateButton();
+        ch2p.checkChocolateButtonText();
     }
 
 }

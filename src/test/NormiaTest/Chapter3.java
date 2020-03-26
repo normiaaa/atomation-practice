@@ -1,21 +1,12 @@
 package NormiaTest;
 
-import org.openqa.selenium.By;
+import Pages.Chapter3Page;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.Assert;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -23,56 +14,29 @@ import java.util.concurrent.TimeUnit;
 public class Chapter3 {
 
 
-    private Utils utilsFunction = new Utils();
+
+    public Utility utils = new Utility();
     private final String userDirProperty = System.getProperty("user.dir");
     private ChromeDriver chromeDriver;
 
-
-    public void refresh () {
-        chromeDriver.navigate().refresh();
-    }
-
-    public void word () {
-
-        List<String> expectedWords = new ArrayList<>(Arrays.asList("pool", "fool", "mool", "cool")) ;
-        Integer counter = 0;
-
-        for(;;) {
-            counter++;
-
-            String myText = chromeDriver.findElementById("leftdiv").getText();
-
-            if(expectedWords.contains(myText)) {
-                Assert.assertTrue(expectedWords.contains(myText));
-                expectedWords.remove(myText);
-                refresh();
-            }
-
-
-            if (expectedWords.size() == 0) {
-                break;
-            }
-        }
-
-
-        System.out.println("Number of final retries is: " + counter);
-
-
-    }
-
-
+    Chapter3Page ch3p;
 
 
     //TODO : when all the words from myText are found in the list, break the iteration.
 
-
+    @BeforeMethod
+    public void beforeMethod() {
+        System.out.println("BeforeMethod");
+        chromeDriver.get(utils.URL_CHAPTER3);
+    }
 
     @BeforeTest
     public void setup() {
         System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
         chromeDriver = new ChromeDriver();
         chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
+        chromeDriver.get(utils.URL_CHAPTER3);
+        ch3p = new Chapter3Page(this.chromeDriver);
     }
 
     @AfterTest
@@ -80,20 +44,31 @@ public class Chapter3 {
         chromeDriver.quit();
     }
 
+
+
+
     //Elements are displayed
 
     @Test(description = "Buttons", priority = 1)
     public void contentTest() throws InterruptedException {
-        chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
+       // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
+
+        //Random Changing element
+
+        ch3p.refresh();
+        ch3p.word();
 
 
 
-        //1st Text
+        //Check zodiac text
 
-        chromeDriver.findElementById("divinthecenter").click();
-        Assert.assertTrue(chromeDriver.findElementById("divinthecenter").getText().equals("Virgo Cancer Capricorn'"));
+        ch3p.checkZodiacElements();
 
-        //2nd Text
+        //Check current date
+
+
+
+
 
 
 
@@ -147,11 +122,6 @@ public class Chapter3 {
         //Current date method
 
 
-        Date now = new Date();
-        String str1 = "EEE dd MMM yyyy";
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat(str1, Locale.US);
-        Assert.assertTrue(chromeDriver.findElementById("centerdiv").getText().equals(dateFormat.format(now)));
 
 
     }
