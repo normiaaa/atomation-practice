@@ -1,48 +1,25 @@
 package NormiaTest;
 
 import Pages.Chapter1Page;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
 
-
-
-public class Chapter1{
-
-
-    private final String userDirProperty = System.getProperty("user.dir");
-    private ChromeDriver chromeDriver;
-    public Utility utils = new Utility();
-
+public class Chapter1 extends TestClassParent {
 
 
     Chapter1Page ch1p;
 
-    @BeforeMethod
-    public void beforeMethod() {
-        System.out.println("BeforeMethod");
-        chromeDriver.get(utils.URL_CHAPTER1);
-
-        //I found this method - to get the URL before each method. is this ok? or?
-    }
 
     @BeforeTest
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
-        chromeDriver = new ChromeDriver();
-        chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        chromeDriver.get(utils.GENERAL_URL);
-        ch1p = new Chapter1Page(this.chromeDriver);
+
+        super.setup();
+        ch1p = new Chapter1Page(driver);
+        ch1p.navigateToURL(utils.URL_CHAPTER1);
     }
 
-    @AfterTest
-    public void tearDown() {
-        chromeDriver.quit();
-    }
+
 
     //Elements are displayed
 
@@ -72,13 +49,13 @@ public class Chapter1{
 
         //Open the first Window
 
-        ch1p.clickOnNewWindow1();
-        ch1p.checkNewWindow1();
-
-        //Open the second window
-
-        ch1p.openNewWindow2();
-        ch1p.checkNewWindow2();
+//        ch1p.clickOnNewWindow1();
+//        ch1p.checkNewWindow1();
+//
+//        //Open the second window
+//
+//        ch1p.openNewWindow2();
+//        ch1p.checkNewWindow2();
 
         //Load a page with Ajax
 

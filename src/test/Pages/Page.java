@@ -23,6 +23,13 @@ public class Page {
         Assert.assertTrue(this.driver.getTitle().contains(utils.TITLE));
     }
 
+    public void navigateToURL(String URL) {
+
+
+        driver.get(URL);
+
+    }
+
 
 
 }

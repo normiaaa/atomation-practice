@@ -3,10 +3,19 @@ package Pages;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class Chapter1Page extends Page{
+
+
+    @FindBy(css = ".ajaxdiv.wind")
+    private
+    WebElement ajaxDiv;
+
+    //Right click on web element -> Refactor -> Encapsulate Fields
 
 
 
@@ -20,6 +29,7 @@ public class Chapter1Page extends Page{
     By selectElementId = By.id("selecttype");
     By verifyButton = By.id("verifybutton");
     By leftDiv = By.id("divontheleft");
+
 
 
 
@@ -94,7 +104,8 @@ public class Chapter1Page extends Page{
         //Second Window open
 
         driver.findElement(multipleWindowButtonByClass2).click();
-        softAssertions.assertThat(driver.findElement(multipleWindowButtonByClass2).getAttribute("href")).isEqualTo(utils.WINDOW_URL);
+        System.out.println(driver.findElement(multipleWindowButtonByClass2).getAttribute("href"));
+       // softAssertions.assertThat(driver.findElement(multipleWindowButtonByClass2).getAttribute("href").equals(utils.WINDOW_URL));
 
     }
 
@@ -118,7 +129,7 @@ public class Chapter1Page extends Page{
         //Load a page with Ajax
 
         driver.findElement(elementAjaxClass).click();
-        softAssertions.assertThat(driver.findElement(elementAjaxClass).getAttribute("href")).contains(utils.AJAX_ELEMENT);
+        Assert.assertTrue(ajaxDiv.getText().contains(utils.AJAX_ELEMENT));
     }
 
     // Test number 4
@@ -140,4 +151,7 @@ public class Chapter1Page extends Page{
     }
 
 
+    public WebElement getAjaxDiv() {
+        return ajaxDiv;
+    }
 }
