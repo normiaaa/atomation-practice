@@ -2,6 +2,7 @@ package Pages;
 
 import NormiaTest.Utility;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class Page {
@@ -16,6 +17,7 @@ public class Page {
     public Page(WebDriver driver){
 
         this.driver = driver;
+        PageFactory.initElements(driver, this);
 
     }
     public void checkTitle() {
@@ -29,6 +31,8 @@ public class Page {
         driver.get(URL);
 
     }
+
+
 
 
 

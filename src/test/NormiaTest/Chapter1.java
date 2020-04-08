@@ -45,17 +45,17 @@ public class Chapter1 extends TestClassParent {
 
     @Test(description = "Links", priority = 3)
     public void links() throws InterruptedException {
-//        chromeDriver.get(utils.URL_CHAPTER1);
+        driver.get(utils.URL_CHAPTER1);
 
         //Open the first Window
 
-//        ch1p.clickOnNewWindow1();
-//        ch1p.checkNewWindow1();
-//
-//        //Open the second window
-//
-//        ch1p.openNewWindow2();
-//        ch1p.checkNewWindow2();
+        ch1p.clickOnNewWindow1();
+        ch1p.checkNewWindow1();
+
+        //Open the second window
+
+        ch1p.openNewWindow2();
+        ch1p.checkNewWindow2();
 
         //Load a page with Ajax
 

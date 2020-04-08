@@ -2,8 +2,9 @@ package Pages;
 
 import NormiaTest.Utility;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import java.text.SimpleDateFormat;
@@ -14,9 +15,21 @@ public class Chapter3Page extends Page {
     public Utility utils = new Utility();
     SoftAssertions softAssertions = new SoftAssertions();
 
-    By leftDivByID = By.id("leftdiv");
-    By zodiacElementsByID = By.id("divinthecenter");
-    By currentDateByID = By.id("centerdiv");
+    @FindBy(id = "leftdiv")
+    private
+    WebElement leftDiv;
+
+    @FindBy(id = "divinthecenter")
+    private
+    WebElement zodiacElements;
+
+    @FindBy(id = "centerdiv")
+    private
+    WebElement currentDate;
+
+
+
+
 
     public Chapter3Page (WebDriver driver) {
 
@@ -41,7 +54,7 @@ public class Chapter3Page extends Page {
             for (; ; ) {
                 counter++;
 
-                String myText = driver.findElement(leftDivByID).getText();
+                String myText = leftDiv.getText();
 
                 if (expectedWords.contains(myText)) {
                     Assert.assertTrue(expectedWords.contains(myText));
@@ -63,8 +76,8 @@ public class Chapter3Page extends Page {
 
         public void checkZodiacElements() {
 
-            driver.findElement(zodiacElementsByID).isDisplayed();
-            Assert.assertTrue(driver.findElement(zodiacElementsByID).getText().equals(utils.TEXT_ZODIAC));
+            zodiacElements.isDisplayed();
+            Assert.assertTrue(zodiacElements.getText().equals(utils.TEXT_ZODIAC));
 
         }
 
@@ -74,7 +87,7 @@ public class Chapter3Page extends Page {
             String str1 = "EEE dd MMM yyyy";
 
             SimpleDateFormat dateFormat = new SimpleDateFormat(str1, Locale.US);
-            Assert.assertTrue(driver.findElement(currentDateByID).getText().equals(dateFormat.format(now)));
+            Assert.assertTrue(currentDate.getText().equals(dateFormat.format(now)));
 
 
 

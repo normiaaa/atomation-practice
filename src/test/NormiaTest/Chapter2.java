@@ -2,14 +2,11 @@ package NormiaTest;
 
 import Pages.Chapter2Page;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-public class Chapter2 {
+public class Chapter2 extends TestClassParent {
 
     public Utility utils = new Utility();
 
@@ -26,17 +23,12 @@ public class Chapter2 {
 
         @BeforeTest
         public void setup () {
-            System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
+            super.setup();
             chromeDriver = new ChromeDriver();
-            chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            chromeDriver.get(utils.URL_CHAPTER2);
             ch2p = new Chapter2Page(this.chromeDriver);
         }
 
-    @AfterTest
-    public void tearDown() {
-        chromeDriver.quit();
-    }
+
 
     //Elements are displayed
 

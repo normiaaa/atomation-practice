@@ -17,6 +17,7 @@ public class TestClassParent {
 
     WebDriver driver;
 
+
     @BeforeMethod
     public void beforeMethod() {
         System.out.println("BeforeMethod");
@@ -36,4 +37,6 @@ public class TestClassParent {
     public void tearDown() {
         driver.quit();
     }
+
+
 }

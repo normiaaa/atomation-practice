@@ -2,8 +2,9 @@ package Pages;
 
 import NormiaTest.Utility;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class Chapter2Page extends Page{
@@ -11,12 +12,36 @@ public class Chapter2Page extends Page{
     public Utility utils = new Utility();
     SoftAssertions softAssertions = new SoftAssertions();
 
-    By firstButtonByName = By.name("but2");
-    By randomButtonByCss = By.cssSelector("[value='Random']");
-    By idButtonById = By.id("but1");
-    By siblingButtonByCss = By.cssSelector("[value='Sibling Button']");
-    By verifyButtonByName = By.name("verifybutton");
-    By chocolateButtonByName = By.name("verifybutton1");
+    @FindBy(name = "but2")
+    private
+    WebElement firstButton;
+
+    @FindBy(css = "[value='Random']")
+    private
+    WebElement randomButton;
+
+    @FindBy(id = "but1")
+    private
+    WebElement idButton;
+
+    @FindBy(css = "[value='Sibling Button']")
+    private
+    WebElement siblingButton;
+
+    @FindBy(name = "verifybutton")
+    private
+    WebElement verifyButton;
+
+    @FindBy(name = "verifybutton1")
+    private
+    WebElement chocolateButton;
+
+
+
+
+
+
+
 
 
 
@@ -32,13 +57,13 @@ public class Chapter2Page extends Page{
 
     public void clickOnButtonWithName() {
 
-        driver.findElement(firstButtonByName).click();
+        firstButton.click();
 
     }
 
     public void checkButtonWithNameText() {
 
-        Assert.assertTrue(driver.findElement(firstButtonByName).getAttribute("value").contains(utils.BUTTON_WITH_NAME));
+        Assert.assertTrue(firstButton.getAttribute("value").contains(utils.BUTTON_WITH_NAME));
 
     }
 
@@ -46,26 +71,26 @@ public class Chapter2Page extends Page{
 
     public void clickOnRandomButton() {
 
-        driver.findElement(randomButtonByCss).click();
+        randomButton.click();
 
     }
 
     public void checkRandomButtonText() {
 
-        Assert.assertTrue(driver.findElement(randomButtonByCss).getAttribute("value").contains(utils.BUTTON_RANDOM));
+        Assert.assertTrue(randomButton.getAttribute("value").contains(utils.BUTTON_RANDOM));
     }
 
     //3rd button
 
     public void clickOnButtonWithID() {
 
-        driver.findElement(idButtonById ).click();
+        idButton.click();
 
     }
 
     public void checknButtonWithIDText() {
 
-        Assert.assertTrue(driver.findElement(idButtonById ).getAttribute("value").contains(utils.BUTTON_ID));
+        Assert.assertTrue(idButton.getAttribute("value").contains(utils.BUTTON_ID));
 
 
     }
@@ -74,12 +99,12 @@ public class Chapter2Page extends Page{
 
     public void clickOnSiblingButton() {
 
-        driver.findElement(siblingButtonByCss).click();
+        siblingButton.click();
     }
 
     public void checkSiblingButtonText() {
 
-        Assert.assertTrue(driver.findElement(siblingButtonByCss).getAttribute("value").contains(utils.BUTTON_SIBLING));
+        siblingButton.getAttribute("value").contains(utils.BUTTON_SIBLING);
 
     }
 
@@ -87,13 +112,13 @@ public class Chapter2Page extends Page{
 
     public void clickOnVerifyButton() {
 
-        driver.findElement(verifyButtonByName).click();
+        verifyButton.click();
 
     }
 
     public void checkVerifyButtonText() {
 
-        Assert.assertTrue(driver.findElement(verifyButtonByName).getAttribute("value").contains(utils.BUTTON_VERIFY));
+        Assert.assertTrue(verifyButton.getAttribute("value").contains(utils.BUTTON_VERIFY));
     }
 
     //6th button
@@ -101,14 +126,14 @@ public class Chapter2Page extends Page{
 
     public void clickOnChocolateButton() {
 
-        driver.findElement(chocolateButtonByName).click();
+        chocolateButton.click();
 
 
     }
 
     public void checkChocolateButtonText() {
 
-        Assert.assertTrue(driver.findElement(chocolateButtonByName).getAttribute("value").contains(utils.BUTTON_CHOCOLATE));
+        Assert.assertTrue(chocolateButton.getAttribute("value").contains(utils.BUTTON_CHOCOLATE));
 
     }
 

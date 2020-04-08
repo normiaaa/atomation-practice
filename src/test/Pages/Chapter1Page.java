@@ -1,7 +1,6 @@
 package Pages;
 
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,20 +14,54 @@ public class Chapter1Page extends Page{
     private
     WebElement ajaxDiv;
 
+    @FindBy(className = "multiplewindow")
+    private
+    WebElement multipleWindowButton1;
+
+    @FindBy(className = "multiplewindow2")
+    private
+    WebElement multipleWindowButton2;
+
+
+    @FindBy(className = "loadajax")
+    private
+    WebElement elementAjax;
+
+    @FindBy(id = "secondajaxbutton")
+    private
+    WebElement secondAjaxButton;
+
+    @FindBy(id = "radiobutton")
+    private
+    WebElement radioButton;
+
+    @FindBy(id = "selecttype")
+    private
+    WebElement selectElement;
+
+    @FindBy(id = "verifybutton")
+    private
+    WebElement verifyButton;
+
+    @FindBy(id = "divontheleft")
+    private
+    WebElement leftDiv;
+
+
     //Right click on web element -> Refactor -> Encapsulate Fields
 
 
 
     SoftAssertions softAssertions = new SoftAssertions();
     //Assert.assert equals
-    By multipleWindowButtonByClass1 = By.className("multiplewindow");
-    By multipleWindowButtonByClass2 = By.className("multiplewindow2");
-    By elementAjaxClass = By.className("loadajax");
-    By secondAjaxButton = By.id("secondajaxbutton");
-    By radioButtonElementId = By.id("radiobutton");
-    By selectElementId = By.id("selecttype");
-    By verifyButton = By.id("verifybutton");
-    By leftDiv = By.id("divontheleft");
+
+
+
+
+
+
+
+
 
 
 
@@ -45,8 +78,8 @@ public class Chapter1Page extends Page{
 
     public void checkIfButtonIsDisplayed() {
 
-        driver.findElement(verifyButton).isDisplayed();
-        Assert.assertTrue(driver.findElement(leftDiv).getText().contains(utils.ASSERT_TEXT_PAGE));
+        verifyButton.isDisplayed();
+        Assert.assertTrue(leftDiv.getText().contains(utils.ASSERT_TEXT_PAGE));
 
     }
 
@@ -54,26 +87,26 @@ public class Chapter1Page extends Page{
     //Test number 2
 
     public void clickOnRadioButton() {
-        driver.findElement(radioButtonElementId).click();
+        radioButton.click();
     }
 
     public void selectItemsFromDropdown() {
-        driver.findElement(selectElementId).click();
+        selectElement.click();
 
-        Select select = new Select(driver.findElement(selectElementId));
+        Select select = new Select(selectElement);
         select.selectByValue(utils.SELECT_SELENIUM_VALUE1);
         select.selectByValue(utils.SELECT_SELENIUM_VALUE2);
         select.selectByValue(utils.SELECT_SELENIUM_VALUE3);
         select.selectByValue(utils.SELECT_SELENIUM_VALUE4);
 
-        driver.findElement(selectElementId).click();
+        selectElement.click();
 
     }
 
     public void selectSpecificItemFromDropdown(String itemToSelect) {
 
-        driver.findElement(selectElementId).click();
-        Select select = new Select(driver.findElement(selectElementId));
+        selectElement.click();
+        Select select = new Select(selectElement);
         select.selectByValue(itemToSelect);
 
     }
@@ -87,7 +120,7 @@ public class Chapter1Page extends Page{
 
         //First Window click
 
-        driver.findElement(multipleWindowButtonByClass1).click();
+        multipleWindowButton1.click();
 
 
     }
@@ -96,15 +129,15 @@ public class Chapter1Page extends Page{
 
     public void checkNewWindow1() {
 
-        softAssertions.assertThat(driver.findElement(multipleWindowButtonByClass1).getAttribute("href")).isEqualTo(utils.WINDOW_URL);
+        softAssertions.assertThat(multipleWindowButton1.getAttribute("href")).isEqualTo(utils.WINDOW_URL);
     }
 
     public void openNewWindow2() {
 
         //Second Window open
 
-        driver.findElement(multipleWindowButtonByClass2).click();
-        System.out.println(driver.findElement(multipleWindowButtonByClass2).getAttribute("href"));
+        multipleWindowButton2.click();
+        System.out.println(multipleWindowButton2.getAttribute("href"));
        // softAssertions.assertThat(driver.findElement(multipleWindowButtonByClass2).getAttribute("href").equals(utils.WINDOW_URL));
 
     }
@@ -113,14 +146,14 @@ public class Chapter1Page extends Page{
 
         //Second Window check
 
-        softAssertions.assertThat(driver.findElement(multipleWindowButtonByClass2).getAttribute("href")).isEqualTo(utils.WINDOW_URL);
+        softAssertions.assertThat(multipleWindowButton2.getAttribute("href")).isEqualTo(utils.WINDOW_URL);
     }
 
     public void clickFirstAjaxElement() {
 
         //Load a page with Ajax
 
-        driver.findElement(elementAjaxClass).click();
+       elementAjax.click();
 
     }
 
@@ -128,7 +161,7 @@ public class Chapter1Page extends Page{
 
         //Load a page with Ajax
 
-        driver.findElement(elementAjaxClass).click();
+        elementAjax.click();
         Assert.assertTrue(ajaxDiv.getText().contains(utils.AJAX_ELEMENT));
     }
 
@@ -136,16 +169,16 @@ public class Chapter1Page extends Page{
 
     public void clickSecondAjaxElement() {
 
-        driver.findElement(secondAjaxButton).click();
-        softAssertions.assertThat(driver.findElement(secondAjaxButton).getAttribute("href")).contains(utils.SECOND_AJAX_BUTTON);
+        secondAjaxButton.click();
+        softAssertions.assertThat(secondAjaxButton.getAttribute("href")).contains(utils.SECOND_AJAX_BUTTON);
 
 
     }
 
     public void checkSecondAjaxElement() {
 
-        driver.findElement(secondAjaxButton).click();
-        softAssertions.assertThat(driver.findElement(secondAjaxButton).getAttribute("href")).contains(utils.SECOND_AJAX_BUTTON);
+        secondAjaxButton.click();
+        softAssertions.assertThat(secondAjaxButton.getAttribute("href")).contains(utils.SECOND_AJAX_BUTTON);
 
 
     }
