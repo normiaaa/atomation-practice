@@ -3,12 +3,10 @@ package NormiaTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestClassParent {
+public class TestClassParent implements TestClassParentInterface {
 
 
     private final String userDirProperty = System.getProperty("user.dir");
@@ -18,25 +16,34 @@ public class TestClassParent {
     WebDriver driver;
 
 
-    @BeforeMethod
+    @Override
     public void beforeMethod() {
         System.out.println("BeforeMethod");
         driver.get(utils.URL_CHAPTER1);
 
     }
 
-    @BeforeTest
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-    }
 
     @AfterTest
     public void tearDown() {
-        driver.quit();
+        this.afterTest();
     }
 
 
+    @Override
+    public void afterMethod() {
+
+    }
+
+    @Override
+    public void beforeTest() {
+        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public void afterTest() {
+        driver.quit();
+    }
 }

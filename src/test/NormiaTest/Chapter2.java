@@ -2,7 +2,6 @@ package NormiaTest;
 
 import Pages.Chapter2Page;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -15,18 +14,14 @@ public class Chapter2 extends TestClassParent {
 
     Chapter2Page ch2p;
 
-    @BeforeMethod
-    public void beforeMethod() {
-        System.out.println("BeforeMethod");
-        chromeDriver.get(utils.URL_CHAPTER2);
-    }
 
-        @BeforeTest
-        public void setup () {
-            super.setup();
-            chromeDriver = new ChromeDriver();
-            ch2p = new Chapter2Page(this.chromeDriver);
-        }
+    @BeforeTest
+    public void setup () {
+        super.beforeTest();
+        chromeDriver = new ChromeDriver();
+        ch2p = new Chapter2Page(this.chromeDriver);
+        ch2p.navigate();
+    }
 
 
 

@@ -27,6 +27,14 @@ public class Chapter3Page extends Page {
     private
     WebElement currentDate;
 
+    public void navigate() {
+        driver.get(utils.URL_CHAPTER3);
+    }
+
+    @Override
+    public void checkTitle() {
+        this.driver.get(utils.URL_CHAPTER3);
+    }
 
 
 
@@ -46,31 +54,58 @@ public class Chapter3Page extends Page {
 
         }
 
-        public void word () {
+        public String word (int id) {
 
-            List<String> expectedWords = new ArrayList<>(Arrays.asList("pool", "fool", "mool", "cool"));
-            Integer counter = 0;
+//            List<String> expectedWords = new ArrayList<>(Arrays.asList("pool", "fool", "mool", "cool"));
+//            Integer counter = 0;
+//
+//            boolean findPool = false;
+//            boolean findFool = false;
+//            boolean findMool = false;
+//            boolean findCool = false;
 
-            for (; ; ) {
-                counter++;
+            String text = "";
+
+
+
+
+//            for (; ; ) {
+//                counter++;
 
                 String myText = leftDiv.getText();
 
-                if (expectedWords.contains(myText)) {
-                    Assert.assertTrue(expectedWords.contains(myText));
-                    expectedWords.remove(myText);
-                    refresh();
+                switch (myText) {
+
+                    case "pool":
+                        Assert.assertEquals("pool", myText);
+                        return myText;
+
+                    case "fool":
+                        Assert.assertEquals("fool", myText);
+                        return myText;
+
+
+                    case "mool":
+                        Assert.assertEquals("mool", myText);
+                        return myText;
+
+                    case "cool":
+                        Assert.assertEquals("cool", myText);
+                        return myText;
+
+                    default:
+                        return myText;
+
+
                 }
 
 
-                if (expectedWords.size() == 0) {
-                    break;
-                }
+
             }
 
+//            System.out.println("Number of final retries is: " + counter);
+//        }
 
-            System.out.println("Number of final retries is: " + counter);
-        }
 
         //Check the second text - zodiac elements
 

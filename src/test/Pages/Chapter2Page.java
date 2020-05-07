@@ -36,13 +36,16 @@ public class Chapter2Page extends Page{
     private
     WebElement chocolateButton;
 
+    @Override
+    public void checkTitle() {
+        this.driver.get(utils.URL_CHAPTER2);
+    }
 
 
+    public void navigate() {
+        driver.get(utils.URL_CHAPTER2);
 
-
-
-
-
+    }
 
 
     public Chapter2Page (WebDriver driver) {

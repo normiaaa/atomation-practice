@@ -14,9 +14,9 @@ public class Chapter1 extends TestClassParent {
     @BeforeTest
     public void setup() {
 
-        super.setup();
+        super.beforeTest();
         ch1p = new Chapter1Page(driver);
-        ch1p.navigateToURL(utils.URL_CHAPTER1);
+        ch1p.navigate();
     }
 
 

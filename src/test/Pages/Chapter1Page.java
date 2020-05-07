@@ -1,6 +1,7 @@
 package Pages;
 
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,7 @@ import org.testng.Assert;
 public class Chapter1Page extends Page{
 
 
-    @FindBy(css = ".ajaxdiv.wind")
+    @FindBy(css = "#ajaxdiv > p")
     private
     WebElement ajaxDiv;
 
@@ -31,7 +32,7 @@ public class Chapter1Page extends Page{
     private
     WebElement secondAjaxButton;
 
-    @FindBy(id = "radiobutton")
+    @FindBy(id = "radiobutton11111") //Without 111 - example just for try - catch
     private
     WebElement radioButton;
 
@@ -56,16 +57,9 @@ public class Chapter1Page extends Page{
     //Assert.assert equals
 
 
-
-
-
-
-
-
-
-
-
-
+    public void navigate() {
+        driver.get(utils.URL_CHAPTER1);
+    }
 
 
     public Chapter1Page (WebDriver driver) {
@@ -87,7 +81,16 @@ public class Chapter1Page extends Page{
     //Test number 2
 
     public void clickOnRadioButton() {
-        radioButton.click();
+        try {
+
+            radioButton.click();
+        }
+
+        catch (NoSuchElementException elementException) {
+
+            System.out.println("Could not find element Radio Button\n" + elementException);
+        }
+
     }
 
     public void selectItemsFromDropdown() {
@@ -161,7 +164,11 @@ public class Chapter1Page extends Page{
 
         //Load a page with Ajax
 
-        elementAjax.click();
+
+        wait(ajaxDiv);
+
+        // should I put a time limit for the test to look for an element ?
+
         Assert.assertTrue(ajaxDiv.getText().contains(utils.AJAX_ELEMENT));
     }
 

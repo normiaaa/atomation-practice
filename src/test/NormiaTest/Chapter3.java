@@ -2,7 +2,6 @@ package NormiaTest;
 
 import Pages.Chapter3Page;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -21,18 +20,15 @@ public class Chapter3 extends TestClassParent {
 
     //TODO : when all the words from myText are found in the list, break the iteration.
 
-    @BeforeMethod
-    public void beforeMethod() {
-        System.out.println("BeforeMethod");
-        chromeDriver.get(utils.URL_CHAPTER3);
-    }
 
     @BeforeTest
     public void setup() {
 
-        super.setup();
+        super.beforeTest();
         chromeDriver = new ChromeDriver();
         ch3p = new Chapter3Page(this.chromeDriver);
+        ch3p.navigate();
+
     }
 
 
@@ -43,18 +39,36 @@ public class Chapter3 extends TestClassParent {
 
     @Test(description = "Buttons", priority = 1)
     public void contentTest() throws InterruptedException {
-       // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
+        // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
 
         //Random Changing element
 
-        ch3p.refresh();
-        ch3p.word();
+        int counter = 0;
+        int id = 0;
 
+        String content = "";
+
+        do  {
+
+            content = ch3p.word(id++);
+            ch3p.refresh();
+
+            if (id == 4)
+                System.out.println("Number of final retries is: " + counter);
+
+            counter++;
+
+
+        }
+
+        while (id <= 4);
 
 
         //Check zodiac text
 
         ch3p.checkZodiacElements();
+
+    }
 
         //Check current date
 
@@ -117,4 +131,4 @@ public class Chapter3 extends TestClassParent {
 
 
     }
-}
+
