@@ -17,6 +17,8 @@ public class Chapter2 extends TestClassParent {
 
     @BeforeTest
     public void setup () {
+
+
         super.beforeTest();
         chromeDriver = new ChromeDriver();
         ch2p = new Chapter2Page(this.chromeDriver);
@@ -27,7 +29,7 @@ public class Chapter2 extends TestClassParent {
 
     //Elements are displayed
 
-    @Test(description = "Buttons", priority = 1)
+    @Test(description = "Buttons", priority = 1, groups = {"display_elements"})
     public void contentTest() {
        // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter2");
 

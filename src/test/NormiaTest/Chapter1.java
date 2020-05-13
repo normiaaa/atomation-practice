@@ -1,14 +1,29 @@
 package NormiaTest;
 
 import Pages.Chapter1Page;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 
 public class Chapter1 extends TestClassParent {
 
 
     Chapter1Page ch1p;
+
+//    private static final String KEY = "test";
+
+//    @BeforeClass
+//    public void beforeClass(ITestContext context) {
+//        String value = context.getCurrentXmlTest().getParameter(KEY);
+//        System.out.println("VALUEEE >> " + value);
+//    }
+//
+//    @Test
+//    public void testMethod() {
+//        String value = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter(KEY);
+//        System.out.println("VALUEEE >> " + value);
+//    }
+//
 
 
     @BeforeTest
@@ -23,8 +38,8 @@ public class Chapter1 extends TestClassParent {
 
     //Elements are displayed
 
-    @Test(description = "Display Elements", priority = 1)
-    public void contentTest() {
+    @Test(description = "Display Elements", priority = 1, groups = {"display_elements"})
+    public void contentTest(ITestContext context) {
 
         //Check title
         ch1p.checkTitle();
@@ -32,7 +47,7 @@ public class Chapter1 extends TestClassParent {
 
     }
 
-    @Test(description = "Radio Button and List", priority = 2)
+    @Test(description = "Radio Button and List", priority = 2, groups = { "display_elements"})
     public void radioButtonListTest() throws InterruptedException {
 
         ch1p.clickOnRadioButton();

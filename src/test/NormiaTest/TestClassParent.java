@@ -16,6 +16,7 @@ public class TestClassParent implements TestClassParentInterface {
     WebDriver driver;
 
 
+
     @Override
     public void beforeMethod() {
         System.out.println("BeforeMethod");
@@ -44,6 +45,7 @@ public class TestClassParent implements TestClassParentInterface {
 
     @Override
     public void afterTest() {
+        driver = new ChromeDriver();
         driver.quit();
     }
 }

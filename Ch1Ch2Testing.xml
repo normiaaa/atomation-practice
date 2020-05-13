@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Chapter 1 and Chapter 2" parallel="methods" thread-count="2">
+    <test name="test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="NormiaTest.Chapter1"/>
+            <class name="NormiaTest.Chapter2"/>
+        </classes>
+    </test>
+</suite>
