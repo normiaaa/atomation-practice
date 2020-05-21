@@ -2,8 +2,7 @@ package NormiaTest;
 
 import Pages.Chapter1Page;
 import org.testng.ITestContext;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class Chapter1 extends TestClassParent {
 
@@ -11,12 +10,13 @@ public class Chapter1 extends TestClassParent {
     Chapter1Page ch1p;
 
 //    private static final String KEY = "test";
-
-//    @BeforeClass
-//    public void beforeClass(ITestContext context) {
-//        String value = context.getCurrentXmlTest().getParameter(KEY);
-//        System.out.println("VALUEEE >> " + value);
-//    }
+//
+@Parameters({"pageIndex"})
+    @BeforeClass
+    public void beforeClass(@Optional("1") final int i) {
+       this.pageIndex=i;
+        System.out.println("VALUEEE >> " + pageIndex);
+    }
 //
 //    @Test
 //    public void testMethod() {
@@ -26,12 +26,19 @@ public class Chapter1 extends TestClassParent {
 //
 
 
-    @BeforeTest
+    @BeforeMethod(groups = {"display_elements"})
     public void setup() {
 
-        super.beforeTest();
+        super.beforeMethod();
         ch1p = new Chapter1Page(driver);
-        ch1p.navigate();
+
+    }
+
+    @AfterMethod(groups = {"display_elements"})
+    public void teardown() {
+
+        super.afterMethod();
+
     }
 
 

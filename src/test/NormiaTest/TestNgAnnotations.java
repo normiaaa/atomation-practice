@@ -1,10 +1,8 @@
 package NormiaTest;
 
-import org.testng.annotations.*;
-
 public class TestNgAnnotations {
 
-    @BeforeMethod
+  /*  @BeforeMethod
     public void setup() {
         System.out.println(" Before method execution");
     }
@@ -49,5 +47,5 @@ public class TestNgAnnotations {
 
     public String returnFirstString() {
         return "String";
-    }
+    }*/
 }

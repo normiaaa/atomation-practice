@@ -24,9 +24,8 @@ public class Chapter3 extends TestClassParent {
     @BeforeTest
     public void setup() {
 
-        super.beforeTest();
-        chromeDriver = new ChromeDriver();
-        ch3p = new Chapter3Page(this.chromeDriver);
+        super.beforeMethod();
+        ch3p = new Chapter3Page(this.driver);
         ch3p.navigate();
 
     }
@@ -37,7 +36,7 @@ public class Chapter3 extends TestClassParent {
 
     //Elements are displayed
 
-    @Test(description = "Buttons", priority = 1)
+    @Test(description = "Buttons", priority = 6)
     public void contentTest() throws InterruptedException {
         // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
 

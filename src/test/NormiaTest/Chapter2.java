@@ -1,7 +1,7 @@
 package NormiaTest;
 
 import Pages.Chapter2Page;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -10,7 +10,7 @@ public class Chapter2 extends TestClassParent {
     public Utility utils = new Utility();
 
     private final String userDirProperty = System.getProperty("user.dir");
-    private ChromeDriver chromeDriver;
+
 
     Chapter2Page ch2p;
 
@@ -19,17 +19,23 @@ public class Chapter2 extends TestClassParent {
     public void setup () {
 
 
-        super.beforeTest();
-        chromeDriver = new ChromeDriver();
-        ch2p = new Chapter2Page(this.chromeDriver);
+        super.beforeMethod();
+        ch2p = new Chapter2Page(this.driver);
         ch2p.navigate();
+    }
+
+    @AfterTest
+    public void teardown() {
+
+        super.afterMethod();
+
     }
 
 
 
     //Elements are displayed
 
-    @Test(description = "Buttons", priority = 1, groups = {"display_elements"})
+    @Test(description = "Buttons", priority = 5, groups = {"display_elements"})
     public void contentTest() {
        // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter2");
 

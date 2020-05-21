@@ -1,8 +1,8 @@
 package NormiaTest;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +11,7 @@ public class TestClassParent implements TestClassParentInterface {
 
     private final String userDirProperty = System.getProperty("user.dir");
     public Utility utils = new Utility();
-
+    int pageIndex;
 
     WebDriver driver;
 
@@ -20,32 +20,28 @@ public class TestClassParent implements TestClassParentInterface {
     @Override
     public void beforeMethod() {
         System.out.println("BeforeMethod");
+        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
+        driver = new ChromeDriver();
         driver.get(utils.URL_CHAPTER1);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
 
 
-    @AfterTest
-    public void tearDown() {
-        this.afterTest();
-    }
 
+//    @Override
+//    public void beforeTest() {
+//        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
+//        driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//    }
 
     @Override
     public void afterMethod() {
 
-    }
 
-    @Override
-    public void beforeTest() {
-        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    @Override
-    public void afterTest() {
-        driver = new ChromeDriver();
+        System.out.println("AfterMethod");
+        driver.close();
         driver.quit();
     }
 }

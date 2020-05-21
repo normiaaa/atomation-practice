@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="methods" name="Failed suite [Chapter 1 and Chapter 2]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="2" parallel="methods" name="test(failed)" verbose="0">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="NormiaTest.Chapter1">
+        <methods>
+          <include name="links"/>
+          <include name="setup"/>
+          <include name="teardown"/>
+          <include name="loadText"/>
+          <include name="beforeClass"/>
+        </methods>
+      </class> <!-- NormiaTest.Chapter1 -->
+    </classes>
+  </test> <!-- test(failed) -->
+</suite> <!-- Failed suite [Chapter 1 and Chapter 2] -->

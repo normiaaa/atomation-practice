@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Chapters" parallel="methods" thread-count="2">
+<suite name="All Chapters" parallel="methods" thread-count="1">
     <test name="test">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="pageIndex" value="1"/>
         <packages>
             <package name="NormiaTest"/>
         </packages>
