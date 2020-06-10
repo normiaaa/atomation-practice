@@ -9,21 +9,14 @@ public class Chapter1 extends TestClassParent {
 
     Chapter1Page ch1p;
 
-//    private static final String KEY = "test";
-//
-@Parameters({"pageIndex"})
+
+
+    @Parameters({"pageIndex"})
     @BeforeClass
     public void beforeClass(@Optional("1") final int i) {
        this.pageIndex=i;
         System.out.println("VALUEEE >> " + pageIndex);
     }
-//
-//    @Test
-//    public void testMethod() {
-//        String value = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter(KEY);
-//        System.out.println("VALUEEE >> " + value);
-//    }
-//
 
 
     @BeforeMethod(groups = {"display_elements"})
@@ -42,8 +35,7 @@ public class Chapter1 extends TestClassParent {
     }
 
 
-
-    //Elements are displayed
+    //Test 1: Check if elements are displayed
 
     @Test(description = "Display Elements", priority = 1, groups = {"display_elements"})
     public void contentTest(ITestContext context) {
@@ -54,6 +46,8 @@ public class Chapter1 extends TestClassParent {
 
     }
 
+    //Test 2: Check if the Radio Button is checked correctly and Select items from the DropDown menu works accordingly
+
     @Test(description = "Radio Button and List", priority = 2, groups = { "display_elements"})
     public void radioButtonListTest() throws InterruptedException {
 
@@ -61,9 +55,9 @@ public class Chapter1 extends TestClassParent {
         ch1p.selectItemsFromDropdown();
         ch1p.selectSpecificItemFromDropdown(utils.SELECT_SELENIUM_VALUE2);
 
-
-        //I made this by Value text, it should be more ok by index?
     }
+
+    //Test 3: Check if the links are opened correctly
 
     @Test(description = "Links", priority = 3)
     public void links() throws InterruptedException {
@@ -86,6 +80,8 @@ public class Chapter1 extends TestClassParent {
 
 
     }
+
+    //Test 4: Check load text elements
 
     @Test(description = "Radio Button and List", priority = 4)
     public void loadText() throws InterruptedException {

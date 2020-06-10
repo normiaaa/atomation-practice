@@ -18,9 +18,6 @@ public class Chapter3 extends TestClassParent {
     Chapter3Page ch3p;
 
 
-    //TODO : when all the words from myText are found in the list, break the iteration.
-
-
     @BeforeTest
     public void setup() {
 
@@ -30,15 +27,10 @@ public class Chapter3 extends TestClassParent {
 
     }
 
-
-
-
-
-    //Elements are displayed
+    //Test 6: Check if elements are displayed
 
     @Test(description = "Buttons", priority = 6)
     public void contentTest() throws InterruptedException {
-        // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter3");
 
         //Random Changing element
 
@@ -70,63 +62,6 @@ public class Chapter3 extends TestClassParent {
     }
 
         //Check current date
-
-
-
-
-
-
-
-
-
-
-        //TODO :  create a for loop with 15+ iterations and an if condition if you have all 4 elements then break;
-
-
-
-
-
-
-
-//        chromeDriver.findElementById("leftdiv").click();
-//        String myText = chromeDriver.findElementById("leftdiv").getText();
-//
-//        List<String> words = new ArrayList<String>();
-//        words.add(chromeDriver.findElementById("leftdiv").getText());
-//        System.out.println(">>>>>" + myText + "<<<<<<<");
-//        refresh();
-//
-//        System.out.println(">>>>>" + myText + "<<<<<<<");
-//
-//        refresh();
-//
-//        System.out.println(">>>>>" + myText + "<<<<<<<");
-//
-//        refresh();
-//
-//        System.out.println(">>>>>" + myText + "<<<<<<<");
-//
-//        refresh();
-//
-//        System.out.println(">>>>>" + myText + "<<<<<<<");
-//
-//       refresh();
-//
-//        System.out.println(">>>>>" + myText + "<<<<<<<");
-//
-//        Assert.assertTrue(chromeDriver.findElementById("leftdiv").getText().contains("ool"));
-//
-//        chromeDriver.findElementById("leftdiv").getText();
-
-
-
-        //The text is changing after each refresh in this situation. I decided to test this using the above method -> is there a better way to do this?
-        //I saw that there are 4 variations of words, each one containing "ool". I have not found any methods online on how to test text which changes
-        //after each refresh?
-
-        //Current date method
-
-
 
 
     }

@@ -29,13 +29,6 @@ public class TestClassParent implements TestClassParentInterface {
 
 
 
-//    @Override
-//    public void beforeTest() {
-//        System.setProperty("webdriver.chrome.driver", userDirProperty + "/src/main/resources/chromedriver");
-//        driver = new ChromeDriver();
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//    }
-
     @Override
     public void afterMethod() {
 

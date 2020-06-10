@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 public class Chapter2 extends TestClassParent {
 
     public Utility utils = new Utility();
-
     private final String userDirProperty = System.getProperty("user.dir");
 
 
@@ -31,13 +30,10 @@ public class Chapter2 extends TestClassParent {
 
     }
 
-
-
-    //Elements are displayed
+    //Test 5: Check if elements are displayed correctly
 
     @Test(description = "Buttons", priority = 5, groups = {"display_elements"})
     public void contentTest() {
-       // chromeDriver.get("http://book.theautomatedtester.co.uk/chapter2");
 
         //1st button
 
